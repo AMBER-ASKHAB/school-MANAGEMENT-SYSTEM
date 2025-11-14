@@ -1,0 +1,133 @@
+0<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applicant Dashboard – Deshani Scholars School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/Adminstyle.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="logo">
+            <img src="/Screenshot 2025-08-09 185729.png" alt="Logo">
+            <span>Deshani Scholars School</span>
+        </div>
+    </div>
+
+    <!-- Right Profile Sidebar -->
+    <!-- Layout -->
+    <div class="main">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Applicant Portal</h2>
+            <nav>
+                <ul>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            Fee And Charges
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            Fee And Charges Amount
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            Challan Form
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            Generated Form
+                        </a>
+                    </li>
+                    <li>
+                        <form asp-area="Auth" asp-controller="Auth" asp-action="Logout" method="post" style="  background: none;  color: white;">
+                            <a href="#">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <button type="submit" class="btn btn-danger" style="background:none; color:white">Logout</button>
+                            </a>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Workspace -->
+        <main class="workspace">
+            <section>
+                <h2>Fee And Charges Management</h2>
+                <br />
+                <div style="display:flex; gap:25px;"> <!-- Added small gap here -->
+                    <div style="width:35%">
+                        <!-- Remove asp-action since we're using AJAX -->
+                        <form id="feeForm" method="post">
+                            <input type="hidden" id="feeId" />
+                            <p style="font-weight: bold;font-size: 22px;margin:0px" id="schoolName">Set Heads</p>
+                            <div class="field">
+                                <label>Select Category</label><br>
+                                <select id="category" required>
+                                    <option value="">--Select--</option>
+                                    <option value="Admission Charges">Admission Charges</option>
+                                    <option value="Class Fee Charges">Class Fee Charges</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="field">
+                                <label>Enter Feehead Name</label><br>
+                                <input id="feeHead" type="text" placeholder="Enter feehead.." required>
+                            </div>
+                            <br>
+                            <div>
+                                <button id="submitBtn" type="submit">Set Feehead</button>
+                                <button type="button" id="cancelEdit" style="display:none; margin-left: 10px;" onclick="resetForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div style="width:65%;">
+                        <p style="font-weight: bold;font-size: 22px;margin:0px" id="schoolName">Fee Heads List</p>
+
+                        <!-- Category Filter -->
+                        <div class="field">
+                            <label>Select Category</label><br>
+                            <select id="filterCategory">
+                                <option value="">--Select--</option>
+                                <option value="Admission Charges">Admission Charges</option>
+                                <option value="Class Fee Charges">Class Fee Charges</option>
+                                <option value="Others">Others</option>
+                                <option value="All">All</option>
+                            </select>
+                        </div>
+
+                        <table id="feeTable" border="1" style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Feehead Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align:left">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+
+</html>

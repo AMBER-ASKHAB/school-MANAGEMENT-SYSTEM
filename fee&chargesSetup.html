@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applicant Dashboard – Deshani Scholars School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/Adminstyle.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="logo">
+            <img src="/Screenshot 2025-08-09 185729.png" alt="Logo">
+            <span>Deshani Scholars School</span>
+        </div>
+    </div>
+
+    <!-- Right Profile Sidebar -->
+    <!-- Layout -->
+    <div class="main">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Applicant Portal</h2>
+            <nav>
+                <ul>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            Fee And Charges
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            Fee And Charges Amount
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            Challan Form
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            Generated Form
+                        </a>
+                    </li>
+                    <li>
+                        <form asp-area="Auth" asp-controller="Auth" asp-action="Logout" method="post" style="  background: none;  color: white;">
+                            <a href="#">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <button type="submit" class="btn btn-danger" style="background:none; color:white">Logout</button>
+                            </a>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Workspace -->
+        <main class="workspace">
+            <section>
+                <h2>Fee And Charges Setup</h2>
+                <br />
+<div style="display:flex">
+    <div style="width:35%">
+        <form method="post" id="feeForm">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="editId" id="editId" />
+
+            <div class="field">
+                <label>Select Category</label><br>
+                <select name="Category" id="category" required>
+                    <option value="">--Select--</option>
+                    <option value="Admission Charges">Admission Charges</option>
+                    <option value="Class Fee Charges">Class Fee Charges</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <br>
+
+            <div class="field" id="classField" style="display:none">
+                <label>Select Class</label><br>
+                <select name="classID" id="classID">
+                    <option value="">--Select--</option>
+                    @if (ViewBag.Classes is not null)
+                    {
+                        foreach (var cls in ViewBag.Classes)
+                        {
+                            <option value="@cls.Id">@cls.Prefix</option>
+                        }
+                    }
+                </select>
+            </div>
+            <br>
+
+            <div class="field">
+                <label>Select Feehead</label><br>
+                <select name="feeHead" id="feeHead" required>
+                    <option value="">--Select--</option>
+                </select>
+            </div>
+            <br>
+
+            <div class="field">
+                <label>Enter Fee Amount</label><br>
+                <input name="amount" type="number" id="amount" placeholder="5000.." min="0" required />
+            </div>
+            <br>
+
+            <div>
+                <button type="submit" id="submitBtn">Set Fee</button>
+                <button type="button" id="cancelEdit" style="display:none; margin-left: 10px;" onclick="resetForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Right Table -->
+    <div style="width:65%; margin-left:20px;">
+        <div class="field">
+            <label>Select Category</label><br>
+            <select id="tablecategory">
+                <option value="">--Select--</option>
+                <option value="Admission Charges">Admission Charges</option>
+                <option value="Class Fee Charges">Class Fee Charges</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
+        <br>
+        <div class="field" id="tableclassField" style="display:none">
+            <label>Select Class</label><br>
+            <select id="tableclassID">
+                <option value="">--Select--</option>
+                @if (ViewBag.Classes is not null)
+                {
+                    foreach (var cls in ViewBag.Classes)
+                    {
+                        <option value="@cls.Id">@cls.Prefix</option>
+                    }
+                }
+            </select>
+        </div>
+        <br />
+        <table id="feeTable" border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Fee Head</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                <tr>
+                    <td colspan="3" style="text-align: center;">Please select a category</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+            </section>
+        </main>
+    </div>
+
+</body>
+
+</html>
